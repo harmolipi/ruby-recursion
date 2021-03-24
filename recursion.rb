@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 # iterative fibonacci sequence
 
-def fibs(n)
+def fibs(num)
   fib = []
 
-  (0..n).each do |i|
-    if i == 0
-      fib << 0
-    elsif i == 1
-      fib << 1
-    else
-      fib << fib[i-1] + fib[i-2]
-    end
+  (0..num).each do |i|
+    fib << if i.zero?
+             0
+           elsif i == 1
+             1
+           else
+             fib[i - 1] + fib[i - 2]
+           end
   end
   fib
 end
 
-p fibs(8)
+p "Iterative Fibonacci: #{fibs(8)}"
 
 # recursive fibonacci sequence
 
@@ -29,48 +31,41 @@ end
   array << fibs_rec(i)
 end
 
-p array
+p "Recursive Fibonacci: #{array}"
 
 # merge sort
 
-def merge_sort(array, sorted=[])
-  # p 'Sorting'
-  puts '-----'
-  p "Array is #{array}"
-  p "Sorted is #{sorted}"
-  puts '-----'
-
-  if array.length == 1
-    sorted << array[0]
-    p sorted
-    sorted
-  elsif array.length == 2
-    if array[0] < array[1]
-      sorted << array[0]
-      sorted << array[1]
-      p sorted
-      sorted
-    else
-      sorted << array[1]
-      sorted << array[0]
-      p sorted
-      sorted
-    end
+def merge_sort(array)
+  if array.length < 2
+    array
   else
-    left = merge_sort(array.slice!(0, array.length/2))
-    right = merge_sort(array)
-    left.each do |x|
-      right.each do |y|
-        if x < y
-          sorted << left.shift
-        else
-          sorted << right.shift
-        end
+    left = merge_sort(array[0...array.length / 2])
+    right = merge_sort(array[array.length / 2..-1])
+
+    x = 0
+    y = 0
+    sorted = []
+
+    (left.length + right.length).times do
+      if x >= left.length
+        sorted << right[y..-1]
+        break
+      elsif y >= right.length
+        sorted << left[x..-1]
+        break
+      end
+
+      if left[x] < right[y]
+        sorted << left[x]
+        x += 1
+      else
+        sorted << right[y]
+        y += 1
       end
     end
-    p sorted
-    sorted
+
+    sorted.flatten
   end
 end
 
-p merge_sort([5, 2, 1, 3, 6, 4])
+p "Merge sort: #{merge_sort([5, 2, 1, 26, 3, 6, 4, 7, 2, 1_000_225])}"
