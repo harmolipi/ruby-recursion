@@ -21,17 +21,17 @@ p "Iterative Fibonacci: #{fibs(8)}"
 
 # recursive fibonacci sequence
 
-array = [0]
+fib_sequence = [0]
 
 def fibs_rec(num)
   num <= 1 ? 1 : fibs_rec(num - 1) + fibs_rec(num - 2)
 end
 
 8.times do |i|
-  array << fibs_rec(i)
+  fib_sequence << fibs_rec(i)
 end
 
-p "Recursive Fibonacci: #{array}"
+p "Recursive Fibonacci: #{fib_sequence}"
 
 # merge sort
 
