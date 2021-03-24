@@ -30,3 +30,23 @@ end
 end
 
 p array
+
+# Merge Sort
+
+def merge_sort(array, sorted=[])
+  if array.length == 1
+    sorted << array[0]
+  elsif array.length == 2
+    if array[0] < array[1]
+      sorted << array[0]
+      sorted << array[1]
+    else
+      sorted << array[0]
+      sorted << array[1]
+    end
+  else
+    merge_sort(array[)
+
+end
+
+merge_sort([5, 2, 1, 3, 6, 4])
