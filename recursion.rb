@@ -31,22 +31,46 @@ end
 
 p array
 
-# Merge Sort
+# merge sort
 
 def merge_sort(array, sorted=[])
+  # p 'Sorting'
+  puts '-----'
+  p "Array is #{array}"
+  p "Sorted is #{sorted}"
+  puts '-----'
+
   if array.length == 1
     sorted << array[0]
+    p sorted
+    sorted
   elsif array.length == 2
     if array[0] < array[1]
       sorted << array[0]
       sorted << array[1]
+      p sorted
+      sorted
     else
-      sorted << array[0]
       sorted << array[1]
+      sorted << array[0]
+      p sorted
+      sorted
     end
   else
-    merge_sort(array[)
-
+    left = merge_sort(array.slice!(0, array.length/2))
+    right = merge_sort(array)
+    left.each do |x|
+      right.each do |y|
+        if x < y
+          sorted << left.shift
+        else
+          sorted << right.shift
+        end
+      end
+    end
+    p sorted
+    sorted
+  end
 end
 
-merge_sort([5, 2, 1, 3, 6, 4])
+p merge_sort([5, 2, 1, 3, 6, 4])
